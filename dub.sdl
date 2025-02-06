@@ -7,5 +7,6 @@ license "Zlib"
 libs "SDL3"
 
 targetPath "out/"
+targetType "sourceLibrary"
 
 buildRequirements "allowWarnings"
