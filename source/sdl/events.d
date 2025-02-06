@@ -1381,7 +1381,7 @@ extern void SDL_SetEventFilter(SDL_EventFilter filter, void* userdata);
  *
  * \sa SDL_SetEventFilter
  */
-extern bool SDL_GetEventFilter(SDL_EventFilter* filter, void** userdata);
+extern bool SDL_GetEventFilter(SDL_EventFilter filter, void** userdata);
 
 /**
  * Add a callback to be triggered when an event is added to the event queue.
