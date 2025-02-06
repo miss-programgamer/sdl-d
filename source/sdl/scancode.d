@@ -33,6 +33,8 @@
 */
 module sdl.scancode;
 
+extern(C) nothrow @nogc:
+
 // TODO: Document Scancodes.
 
 /**

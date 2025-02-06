@@ -56,6 +56,8 @@ import sdl.types;
 import core.stdc.math;
 import core.stdc.float_;
 
+extern(C) nothrow @nogc:
+
 /**
 * The structure that defines a point (using integers).
 *

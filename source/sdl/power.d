@@ -41,19 +41,26 @@
 */
 
 /**
-    SDL Audio
+    SDL Power Handling
 
     See_Also:
-        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryAudio, SDL3 Audio Documentation)
+        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryPower, SDL3 Mouse Documentation)
     
     Copyright: © 2025 Inochi2D Project, © 1997-2025 Sam Lantinga
     License: Subject to the terms of the Zlib License, as written in the LICENSE file.
     Authors: 
         Luna Nielsen
 */
-module sdl.audio;
+module sdl.power;
 import sdl.types;
 
 extern(C) nothrow @nogc:
 
-alias SDL_AudioDeviceID = Uint32;
+enum SDL_PowerState {
+    SDL_POWERSTATE_ERROR = -1,   /**< error determining power status */
+    SDL_POWERSTATE_UNKNOWN,      /**< cannot determine power status */
+    SDL_POWERSTATE_ON_BATTERY,   /**< Not plugged in, running on the battery */
+    SDL_POWERSTATE_NO_BATTERY,   /**< Plugged in, no battery available */
+    SDL_POWERSTATE_CHARGING,     /**< Plugged in, charging battery */
+    SDL_POWERSTATE_CHARGED       /**< Plugged in, battery charged */
+}

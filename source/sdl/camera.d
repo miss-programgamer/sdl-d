@@ -41,19 +41,19 @@
 */
 
 /**
-    SDL Audio
+    SDL Camera Handling
 
     See_Also:
-        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryAudio, SDL3 Audio Documentation)
+        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryCamera, SDL3 Camera Documentation)
     
     Copyright: © 2025 Inochi2D Project, © 1997-2025 Sam Lantinga
     License: Subject to the terms of the Zlib License, as written in the LICENSE file.
     Authors: 
         Luna Nielsen
 */
-module sdl.audio;
+module sdl.camera;
 import sdl.types;
 
 extern(C) nothrow @nogc:
 
-alias SDL_AudioDeviceID = Uint32;
+alias SDL_CameraID = Uint32;

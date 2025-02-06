@@ -41,19 +41,34 @@
 */
 
 /**
-    SDL Audio
+    SDL Sensor Handling
 
     See_Also:
-        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryAudio, SDL3 Audio Documentation)
+        $(LINK2 https://wiki.libsdl.org/SDL3/CategorySensor, SDL3 Sensor Documentation)
     
     Copyright: © 2025 Inochi2D Project, © 1997-2025 Sam Lantinga
     License: Subject to the terms of the Zlib License, as written in the LICENSE file.
     Authors: 
         Luna Nielsen
 */
-module sdl.audio;
+module sdl.sensor;
 import sdl.types;
 
 extern(C) nothrow @nogc:
 
-alias SDL_AudioDeviceID = Uint32;
+/**
+ * The opaque structure used to identify an opened SDL sensor.
+ *
+ * \since This struct is available since SDL 3.2.0.
+ */
+struct SDL_Sensor;
+
+/**
+ * This is a unique ID for a sensor for the time it is connected to the
+ * system, and is never reused for the lifetime of the application.
+ *
+ * The value 0 is an invalid ID.
+ *
+ * \since This datatype is available since SDL 3.2.0.
+ */
+alias SDL_SensorID = Uint32;

@@ -41,19 +41,44 @@
 */
 
 /**
-    SDL Audio
+    SDL Touch Handling
 
     See_Also:
-        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryAudio, SDL3 Audio Documentation)
+        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryTouch, SDL3 Touch Documentation)
     
     Copyright: © 2025 Inochi2D Project, © 1997-2025 Sam Lantinga
     License: Subject to the terms of the Zlib License, as written in the LICENSE file.
     Authors: 
         Luna Nielsen
 */
-module sdl.audio;
+module sdl.touch;
 import sdl.types;
 
 extern(C) nothrow @nogc:
 
-alias SDL_AudioDeviceID = Uint32;
+
+/**
+ * A unique ID for a touch device.
+ *
+ * This ID is valid for the time the device is connected to the system, and is
+ * never reused for the lifetime of the application.
+ *
+ * The value 0 is an invalid ID.
+ *
+ * \since This datatype is available since SDL 3.2.0.
+ */
+alias SDL_TouchID = Uint64;
+
+/**
+ * A unique ID for a single finger on a touch device.
+ *
+ * This ID is valid for the time the finger (stylus, etc) is touching and will
+ * be unique for all fingers currently in contact, so this ID tracks the
+ * lifetime of a single continuous touch. This value may represent an index, a
+ * pointer, or some other unique ID, depending on the platform.
+ *
+ * The value 0 is an invalid ID.
+ *
+ * \since This datatype is available since SDL 3.2.0.
+ */
+alias SDL_FingerID = Uint64;

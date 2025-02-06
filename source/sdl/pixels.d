@@ -54,6 +54,8 @@
 module sdl.pixels;
 import sdl.types;
 
+extern(C) nothrow @nogc:
+
 private {
     version(BigEndian) enum IsBigEndian = true;
     else enum IsBigEndian = false;

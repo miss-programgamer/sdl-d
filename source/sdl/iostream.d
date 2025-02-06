@@ -57,6 +57,8 @@ import sdl.properties;
 
 import core.stdc.stdarg;
 
+extern(C) nothrow @nogc:
+
 /**
  * SDL_IOStream status, set by a read or write operation.
  *

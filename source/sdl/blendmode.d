@@ -54,6 +54,8 @@
 module sdl.blendmode;
 import sdl.types;
 
+extern(C) nothrow @nogc:
+
 /**
  * A set of blend modes used in drawing operations.
  *

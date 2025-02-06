@@ -59,6 +59,8 @@ import sdl.blendmode;
 import sdl.rect;
 import sdl.iostream;
 
+extern(C) nothrow @nogc:
+
 
 /**
 * The flags on an SDL_Surface.
