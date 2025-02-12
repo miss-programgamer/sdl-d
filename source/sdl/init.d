@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.init;
-import sdl.types;
+import sdl.stdc;
 import sdl.events;
 
 extern(C) nothrow @nogc:

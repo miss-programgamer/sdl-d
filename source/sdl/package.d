@@ -12,7 +12,7 @@
 module sdl;
 
 public import sdl.init;
-public import sdl.types;
+public import sdl.stdc;
 public import sdl.events;
 public import sdl.video;
 public import sdl.scancode;

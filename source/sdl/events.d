@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.events;
-import sdl.types;
+import sdl.stdc;
 import sdl.video;
 import sdl.scancode;
 import sdl.keycode;

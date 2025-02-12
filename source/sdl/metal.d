@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.metal;
-import sdl.types;
+import sdl.stdc;
 import sdl.video;
 
 extern(C) nothrow @nogc:

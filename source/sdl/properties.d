@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.properties;
-import sdl.types;
+import sdl.stdc;
 
 extern(C) nothrow @nogc:
 

@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.audio;
-import sdl.types;
+import sdl.stdc;
 
 extern(C) nothrow @nogc:
 

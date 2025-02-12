@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.keycode;
-import sdl.types;
+import sdl.stdc;
 import sdl.scancode;
 
 extern(C) nothrow @nogc:

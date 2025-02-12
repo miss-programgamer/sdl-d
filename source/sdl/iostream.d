@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.iostream;
-import sdl.types;
+import sdl.stdc;
 import sdl.properties;
 
 import core.stdc.stdarg;

@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.touch;
-import sdl.types;
+import sdl.stdc;
 import sdl.mouse;
 
 extern(C) nothrow @nogc:

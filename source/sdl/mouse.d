@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.mouse;
-import sdl.types;
+import sdl.stdc;
 
 extern(C) nothrow @nogc:
 

@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.blendmode;
-import sdl.types;
+import sdl.stdc;
 
 extern(C) nothrow @nogc:
 

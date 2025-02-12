@@ -52,7 +52,7 @@
         Luna Nielsen
 */
 module sdl.rect;
-import sdl.types;
+import sdl.stdc;
 import core.stdc.math;
 import core.stdc.float_;
 
