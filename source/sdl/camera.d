@@ -52,6 +52,9 @@
         Luna Nielsen
 */
 module sdl.camera;
+import sdl.pixels;
+import sdl.surface;
+import sdl.properties;
 import sdl.stdc;
 
 extern(C) nothrow @nogc:
