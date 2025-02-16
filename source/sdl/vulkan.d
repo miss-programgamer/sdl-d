@@ -53,6 +53,7 @@
         Luna Nielsen
 */
 module sdl.vulkan;
+import sdl.video;
 import sdl.stdc;
 import sdl.d;
 
@@ -72,6 +73,10 @@ alias VkPhysicalDevice = OpaqueHandle!("VkPhysicalDevice");
     A Vulkan Surface handle.
 */
 alias VkSurfaceKHR = OpaqueHandle!("VkSurfaceKHR");
+
+/**
+    Opaque allocation callbacks handle
+*/
 struct VkAllocationCallbacks;
 
 /**
