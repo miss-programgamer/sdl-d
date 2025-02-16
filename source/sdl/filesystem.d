@@ -54,8 +54,7 @@
 module sdl.filesystem;
 import sdl.stdc;
 
-extern(C) nothrow @nogc:
-
+extern (C) nothrow @nogc:
 
 /**
     Get the directory where the application was run from.
@@ -96,7 +95,7 @@ extern(C) nothrow @nogc:
     See_Also:
         $(D SDL_GetPrefPath)
 */
-extern const(char)*  SDL_GetBasePath();
+extern const(char)* SDL_GetBasePath();
 
 /**
     Get the user-and-app-specific path where files can be written.
@@ -141,8 +140,8 @@ extern const(char)*  SDL_GetBasePath();
     Windows, '/' on most other platforms).
 
     Params:
-        org the name of your organization.
-        app the name of your application.
+        org =   the name of your organization.
+        app =   the name of your application.
     
     Returns:
         A UTF-8 string of the user directory in platform-dependent
@@ -153,7 +152,7 @@ extern const(char)*  SDL_GetBasePath();
     See_Also:
         $(D SDL_GetBasePath)
 */
-extern char * SDL_GetPrefPath(const(char)* org, const(char)* app);
+extern char* SDL_GetPrefPath(const(char)* org, const(char)* app);
 
 /**
     The type of the OS-provided default folder for a specific purpose.
@@ -185,74 +184,74 @@ extern char * SDL_GetPrefPath(const(char)* org, const(char)* app);
         $(D SDL_GetUserFolder)
 */
 enum SDL_Folder {
-    
+
     /**
         The folder which contains all of the current user's data, preferences, and documents.
         It usually contains most of the other folders.
         If a requested folder does not exist, the home folder can be considered a safe fallback to store a user's documents.
     */
-    SDL_FOLDER_HOME,        
-    
+    SDL_FOLDER_HOME,
+
     /**
         The folder of files that are displayed on the desktop.
         Note that the existence of a desktop folder does not guarantee that the system does show icons on its desktop; 
         certain GNU/Linux distros with a graphical environment may not have desktop icons.
     */
-    SDL_FOLDER_DESKTOP,     
-    
+    SDL_FOLDER_DESKTOP,
+
     /**
         User document files, possibly application-specific.
         This is a good place to save a user's projects.
     */
-    SDL_FOLDER_DOCUMENTS,   
-    
+    SDL_FOLDER_DOCUMENTS,
+
     /**
         Standard folder for user files downloaded from the internet.
     */
-    SDL_FOLDER_DOWNLOADS,   
-    
+    SDL_FOLDER_DOWNLOADS,
+
     /**
         Music files that can be played using a standard music player (mp3, ogg...).
     */
-    SDL_FOLDER_MUSIC,       
-    
+    SDL_FOLDER_MUSIC,
+
     /**
         Image files that can be displayed using a standard viewer (png, jpg...).
     */
-    SDL_FOLDER_PICTURES,    
-    
+    SDL_FOLDER_PICTURES,
+
     /**
         Files that are meant to be shared with other users on the same computer.
     */
-    SDL_FOLDER_PUBLICSHARE, 
-    
+    SDL_FOLDER_PUBLICSHARE,
+
     /**
         Save files for games.
     */
-    SDL_FOLDER_SAVEDGAMES,  
-    
+    SDL_FOLDER_SAVEDGAMES,
+
     /**
         Application screenshots.
     */
-    SDL_FOLDER_SCREENSHOTS, 
-    
+    SDL_FOLDER_SCREENSHOTS,
+
     /**
         Template files to be used when the user requests the desktop environment to create a new file in a certain folder, 
         such as "New Text File.txt".
         
         Any file in the Templates folder can be used as a starting point for a new file.
     */
-    SDL_FOLDER_TEMPLATES,   
-    
+    SDL_FOLDER_TEMPLATES,
+
     /**
         Video files that can be played using a standard video player (mp4, webm...).
     */
-    SDL_FOLDER_VIDEOS,      
-    
+    SDL_FOLDER_VIDEOS,
+
     /**
         Total number of types in this enum, not a folder type by itself.
     */
-    SDL_FOLDER_COUNT        
+    SDL_FOLDER_COUNT
 }
 
 /**
@@ -279,7 +278,7 @@ enum SDL_Folder {
         either a null-terminated C string containing the full path to the
         folder, or NULL if an error happened.
 */
-extern const(char)*  SDL_GetUserFolder(SDL_Folder folder);
+extern const(char)* SDL_GetUserFolder(SDL_Folder folder);
 
 /**
     Types of filesystem entries.
@@ -292,26 +291,26 @@ extern const(char)*  SDL_GetUserFolder(SDL_Folder folder);
         $(D SDL_PathInfo)
 */
 enum SDL_PathType {
-    
+
     /**
         Path does not exist
     */
-    SDL_PATHTYPE_NONE,      
-    
+    SDL_PATHTYPE_NONE,
+
     /**
         A normal file
     */
-    SDL_PATHTYPE_FILE,      
-    
+    SDL_PATHTYPE_FILE,
+
     /**
         A directory
     */
-    SDL_PATHTYPE_DIRECTORY, 
-    
+    SDL_PATHTYPE_DIRECTORY,
+
     /**
         Something completely different like a device node (not a symlink, those are always followed)
     */
-    SDL_PATHTYPE_OTHER      
+    SDL_PATHTYPE_OTHER
 }
 
 /**
@@ -322,31 +321,31 @@ enum SDL_PathType {
         $(D SDL_GetStoragePathInfo)
 */
 struct SDL_PathInfo {
-    
+
     /**
         The path type
     */
-    SDL_PathType type;      
-    
+    SDL_PathType type;
+
     /**
         The file size in bytes
     */
-    Uint64 size;            
-    
+    Uint64 size;
+
     /**
         The time when the path was created
     */
-    SDL_Time create_time;   
-    
+    SDL_Time create_time;
+
     /**
         The last time the path was modified
     */
-    SDL_Time modify_time;   
-    
+    SDL_Time modify_time;
+
     /**
         The last time the path was read
     */
-    SDL_Time access_time;   
+    SDL_Time access_time;
 }
 
 /**
@@ -384,21 +383,21 @@ extern bool SDL_CreateDirectory(const(char)* path);
         $(D SDL_EnumerateDirectoryCallback)
 */
 enum SDL_EnumerationResult {
-    
+
     /**
         Value that requests that enumeration continue.
     */
-    SDL_ENUM_CONTINUE,   
-    
+    SDL_ENUM_CONTINUE,
+
     /**
         Value that requests that enumeration stop, successfully.
     */
-    SDL_ENUM_SUCCESS,    
-    
+    SDL_ENUM_SUCCESS,
+
     /**
         Value that requests that enumeration stop, as a failure.
     */
-    SDL_ENUM_FAILURE     
+    SDL_ENUM_FAILURE
 }
 
 /**
@@ -427,7 +426,8 @@ enum SDL_EnumerationResult {
     See_Also:
         $(D SDL_EnumerateDirectory)
 */
-alias SDL_EnumerateDirectoryCallback = SDL_EnumerationResult function(void *userdata, const(char)* dirname, const(char)* fname);
+alias SDL_EnumerateDirectoryCallback = SDL_EnumerationResult function(
+    void* userdata, const(char)* dirname, const(char)* fname);
 
 /**
     Enumerate a directory through a callback function.
@@ -451,7 +451,7 @@ alias SDL_EnumerateDirectoryCallback = SDL_EnumerationResult function(void *user
         true on success or false on failure; call SDL_GetError() for more
         information.
 */
-extern bool SDL_EnumerateDirectory(const(char)* path, SDL_EnumerateDirectoryCallback callback, void *userdata);
+extern bool SDL_EnumerateDirectory(const(char)* path, SDL_EnumerateDirectoryCallback callback, void* userdata);
 
 /**
     Remove a file or an empty directory.
@@ -545,7 +545,7 @@ extern bool SDL_CopyFile(const(char)* oldpath, const(char)* newpath);
         true on success or false if the file doesn't exist, or another
         failure; call SDL_GetError() for more information.
 */
-extern bool SDL_GetPathInfo(const(char)* path, SDL_PathInfo *info);
+extern bool SDL_GetPathInfo(const(char)* path, SDL_PathInfo* info);
 
 /**
     Enumerate a directory tree, filtered by pattern, and return a list.
@@ -580,7 +580,7 @@ extern bool SDL_GetPathInfo(const(char)* path, SDL_PathInfo *info);
     Threadsafety:
         It is safe to call this function from any thread.
 */
-extern char ** SDL_GlobDirectory(const(char)* path, const(char)* pattern, SDL_GlobFlags flags, int *count);
+extern char** SDL_GlobDirectory(const(char)* path, const(char)* pattern, SDL_GlobFlags flags, int* count);
 
 /**
     Get what the system believes is the "current working directory."
@@ -600,4 +600,4 @@ extern char ** SDL_GlobDirectory(const(char)* path, const(char)* pattern, SDL_Gl
         platform-dependent notation. NULL if there's a problem. This
         should be freed with SDL_free() when it is no longer needed.
 */
-extern char * SDL_GetCurrentDirectory();
+extern char* SDL_GetCurrentDirectory();
