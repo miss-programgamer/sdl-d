@@ -20,6 +20,7 @@ public import sdl.keycode;
 public import sdl.keyboard;
 public import sdl.mouse;
 public import sdl.joystick;
+public import sdl.gamepad;
 public import sdl.power;
 public import sdl.audio;
 public import sdl.camera;
