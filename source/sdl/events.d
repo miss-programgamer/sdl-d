@@ -69,9 +69,7 @@ import sdl.sensor;
 extern(C) nothrow @nogc:
 
 /**
-* The types of events that can be delivered.
-*
-* \since This enum is available since SDL 3.2.0.
+    The types of events that can be delivered.
 */
 enum SDL_EventType {
     SDL_EVENT_FIRST = 0, /**< Unused (do not remove) */

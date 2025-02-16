@@ -62,45 +62,39 @@ private {
 }
 
 /**
-* A fully opaque 8-bit alpha value.
-*
-* \since This macro is available since SDL 3.2.0.
-*
-* \sa SDL_ALPHA_TRANSPARENT
+    A fully opaque 8-bit alpha value.
+
+    See_Also:
+        $(D SDL_ALPHA_TRANSPARENT)
 */
 enum SDL_ALPHA_OPAQUE = 255;
 
 /**
-* A fully opaque floating point alpha value.
-*
-* \since This macro is available since SDL 3.2.0.
-*
-* \sa SDL_ALPHA_TRANSPARENT_FLOAT
+    A fully opaque floating point alpha value.
+
+    See_Also:
+        $(D SDL_ALPHA_TRANSPARENT_FLOAT)
 */
 enum SDL_ALPHA_OPAQUE_FLOAT = 1.0f;
 
 /**
-* A fully transparent 8-bit alpha value.
-*
-* \since This macro is available since SDL 3.2.0.
-*
-* \sa SDL_ALPHA_OPAQUE
+    A fully transparent 8-bit alpha value.
+
+    See_Also:
+        $(D SDL_ALPHA_OPAQUE)
 */
 enum SDL_ALPHA_TRANSPARENT = 0;
 
 /**
-* A fully transparent floating point alpha value.
-*
-* \since This macro is available since SDL 3.2.0.
-*
-* \sa SDL_ALPHA_OPAQUE_FLOAT
+    A fully transparent floating point alpha value.
+
+    See_Also:
+        $(D SDL_ALPHA_OPAQUE_FLOAT)
 */
 enum SDL_ALPHA_TRANSPARENT_FLOAT = 0.0f;
 
 /**
-* Pixel type.
-*
-* \since This enum is available since SDL 3.2.0.
+    Pixel type.
 */
 enum SDL_PixelType {
     SDL_PIXELTYPE_UNKNOWN,
@@ -115,14 +109,13 @@ enum SDL_PixelType {
     SDL_PIXELTYPE_ARRAYU32,
     SDL_PIXELTYPE_ARRAYF16,
     SDL_PIXELTYPE_ARRAYF32,
+
     /* appended at the end for compatibility with sdl2-compat:  */
     SDL_PIXELTYPE_INDEX2
 }
 
 /**
-* Bitmap pixel order, high bit -> low bit.
-*
-* \since This enum is available since SDL 3.2.0.
+    Bitmap pixel order, high bit -> low bit.
 */
 enum SDL_BitmapOrder {
     SDL_BITMAPORDER_NONE,
@@ -131,9 +124,7 @@ enum SDL_BitmapOrder {
 }
 
 /**
-* Packed component order, high bit -> low bit.
-*
-* \since This enum is available since SDL 3.2.0.
+    Packed component order, high bit -> low bit.
 */
 enum SDL_PackedOrder {
     SDL_PACKEDORDER_NONE,
@@ -148,9 +139,7 @@ enum SDL_PackedOrder {
 }
 
 /**
-* Array component order, low byte -> high byte.
-*
-* \since This enum is available since SDL 3.2.0.
+    Array component order, low byte -> high byte.
 */
 enum SDL_ArrayOrder {
     SDL_ARRAYORDER_NONE,
@@ -163,9 +152,7 @@ enum SDL_ArrayOrder {
 }
 
 /**
-* Packed component layout.
-*
-* \since This enum is available since SDL 3.2.0.
+    Packed component layout.
 */
 enum SDL_PackedLayout {
     SDL_PACKEDLAYOUT_NONE,
@@ -180,41 +167,39 @@ enum SDL_PackedLayout {
 }
 
 /**
-* Pixel format.
-*
-* SDL's pixel formats have the following naming convention:
-*
-* - Names with a list of components and a single bit count, such as RGB24 and
-*   ABGR32, define a platform-independent encoding into bytes in the order
-*   specified. For example, in RGB24 data, each pixel is encoded in 3 bytes
-*   (red, green, blue) in that order, and in ABGR32 data, each pixel is
-*   encoded in 4 bytes (alpha, blue, green, red) in that order. Use these
-*   names if the property of a format that is important to you is the order
-*   of the bytes in memory or on disk.
-* - Names with a bit count per component, such as ARGB8888 and XRGB1555, are
-*   "packed" into an appropriately-sized integer in the platform's native
-*   endianness. For example, ARGB8888 is a sequence of 32-bit integers; in
-*   each integer, the most significant bits are alpha, and the least
-*   significant bits are blue. On a little-endian CPU such as x86, the least
-*   significant bits of each integer are arranged first in memory, but on a
-*   big-endian CPU such as s390x, the most significant bits are arranged
-*   first. Use these names if the property of a format that is important to
-*   you is the meaning of each bit position within a native-endianness
-*   integer.
-* - In indexed formats such as INDEX4LSB, each pixel is represented by
-*   encoding an index into the palette into the indicated number of bits,
-*   with multiple pixels packed into each byte if appropriate. In LSB
-*   formats, the first (leftmost) pixel is stored in the least-significant
-*   bits of the byte; in MSB formats, it's stored in the most-significant
-*   bits. INDEX8 does not need LSB/MSB variants, because each pixel exactly
-*   fills one byte.
-*
-* The 32-bit byte-array encodings such as RGBA32 are aliases for the
-* appropriate 8888 encoding for the current platform. For example, RGBA32 is
-* an alias for ABGR8888 on little-endian CPUs like x86, or an alias for
-* RGBA8888 on big-endian CPUs.
-*
-* \since This enum is available since SDL 3.2.0.
+    Pixel format.
+
+    SDL's pixel formats have the following naming convention:
+
+    -   Names with a list of components and a single bit count, such as RGB24 and
+        ABGR32, define a platform-independent encoding into bytes in the order
+        specified. For example, in RGB24 data, each pixel is encoded in 3 bytes
+        (red, green, blue) in that order, and in ABGR32 data, each pixel is
+        encoded in 4 bytes (alpha, blue, green, red) in that order. Use these
+        names if the property of a format that is important to you is the order
+        of the bytes in memory or on disk.
+    -   Names with a bit count per component, such as ARGB8888 and XRGB1555, are
+        "packed" into an appropriately-sized integer in the platform's native
+        endianness. For example, ARGB8888 is a sequence of 32-bit integers; in
+        each integer, the most significant bits are alpha, and the least
+        significant bits are blue. On a little-endian CPU such as x86, the least
+        significant bits of each integer are arranged first in memory, but on a
+        big-endian CPU such as s390x, the most significant bits are arranged
+        first. Use these names if the property of a format that is important to
+        you is the meaning of each bit position within a native-endianness
+        integer.
+    -   In indexed formats such as INDEX4LSB, each pixel is represented by
+        encoding an index into the palette into the indicated number of bits,
+        with multiple pixels packed into each byte if appropriate. In LSB
+        formats, the first (leftmost) pixel is stored in the least-significant
+        bits of the byte; in MSB formats, it's stored in the most-significant
+        bits. INDEX8 does not need LSB/MSB variants, because each pixel exactly
+        fills one byte.
+
+    The 32-bit byte-array encodings such as RGBA32 are aliases for the
+    appropriate 8888 encoding for the current platform. For example, RGBA32 is
+    an alias for ABGR8888 on little-endian CPUs like x86, or an alias for
+    RGBA8888 on big-endian CPUs.
 */
 enum SDL_PixelFormat {
     SDL_PIXELFORMAT_UNKNOWN = 0,
@@ -358,9 +343,7 @@ enum SDL_PixelFormat {
 }
 
 /**
-* Colorspace color type.
-*
-* \since This enum is available since SDL 3.2.0.
+    Colorspace color type.
 */
 enum SDL_ColorType {
     SDL_COLOR_TYPE_UNKNOWN = 0,
@@ -369,10 +352,8 @@ enum SDL_ColorType {
 }
 
 /**
-* Colorspace color range, as described by
-* https://www.itu.int/rec/R-REC-BT.2100-2-201807-I/en
-*
-* \since This enum is available since SDL 3.2.0.
+    Colorspace color range, as described by
+    https://www.itu.int/rec/R-REC-BT.2100-2-201807-I/en
 */
 enum SDL_ColorRange {
     SDL_COLOR_RANGE_UNKNOWN = 0,
@@ -381,10 +362,8 @@ enum SDL_ColorRange {
 }
 
 /**
-* Colorspace color primaries, as described by
-* https://www.itu.int/rec/T-REC-H.273-201612-S/en
-*
-* \since This enum is available since SDL 3.2.0.
+    Colorspace color primaries, as described by
+    https://www.itu.int/rec/T-REC-H.273-201612-S/en
 */
 enum SDL_ColorPrimaries {
     SDL_COLOR_PRIMARIES_UNKNOWN = 0,
@@ -404,12 +383,10 @@ enum SDL_ColorPrimaries {
 }
 
 /**
- * Colorspace transfer characteristics.
- *
- * These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
- *
- * \since This enum is available since SDL 3.2.0.
- */
+    Colorspace transfer characteristics.
+
+    These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
+*/
 enum SDL_TransferCharacteristics {
     SDL_TRANSFER_CHARACTERISTICS_UNKNOWN = 0,
     SDL_TRANSFER_CHARACTERISTICS_BT709 = 1,         /**< Rec. ITU-R BT.709-6 / ITU-R BT1361 */
@@ -433,12 +410,10 @@ enum SDL_TransferCharacteristics {
 }
 
 /**
- * Colorspace matrix coefficients.
- *
- * These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
- *
- * \since This enum is available since SDL 3.2.0.
- */
+    Colorspace matrix coefficients.
+
+    These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
+*/
 enum SDL_MatrixCoefficients {
     SDL_MATRIX_COEFFICIENTS_IDENTITY = 0,
     SDL_MATRIX_COEFFICIENTS_BT709 = 1,              /**< ITU-R BT.709-6 */
@@ -458,10 +433,8 @@ enum SDL_MatrixCoefficients {
 }
 
 /**
- * Colorspace chroma sample location.
- *
- * \since This enum is available since SDL 3.2.0.
- */
+    Colorspace chroma sample location.
+*/
 enum SDL_ChromaLocation {
     SDL_CHROMA_LOCATION_NONE = 0,   /**< RGB, no chroma sampling */
     SDL_CHROMA_LOCATION_LEFT = 1,   /**< In MPEG-2, MPEG-4, and AVC, Cb and Cr are taken on midpoint of the left-edge of the 2x2 square. In other words, they have the same horizontal location as the top-left pixel, but is shifted one-half pixel down vertically. */
@@ -470,20 +443,19 @@ enum SDL_ChromaLocation {
 }
 
 /**
- * Colorspace definitions.
- *
- * Since similar colorspaces may vary in their details (matrix, transfer
- * function, etc.), this is not an exhaustive list, but rather a
- * representative sample of the kinds of colorspaces supported in SDL.
- *
- * \since This enum is available since SDL 3.2.0.
- *
- * \sa SDL_ColorPrimaries
- * \sa SDL_ColorRange
- * \sa SDL_ColorType
- * \sa SDL_MatrixCoefficients
- * \sa SDL_TransferCharacteristics
- */
+    Colorspace definitions.
+
+    Since similar colorspaces may vary in their details (matrix, transfer
+    function, etc.), this is not an exhaustive list, but rather a
+    representative sample of the kinds of colorspaces supported in SDL.
+
+    See_Also:
+       $(D SDL_ColorPrimaries)
+       $(D SDL_ColorRange)
+       $(D SDL_ColorType)
+       $(D SDL_MatrixCoefficients)
+       $(D SDL_TransferCharacteristics)
+*/
 enum SDL_Colorspace {
     SDL_COLORSPACE_UNKNOWN = 0,
 
@@ -575,14 +547,12 @@ enum SDL_Colorspace {
 }
 
 /**
-* A structure that represents a color as RGBA components.
-*
-* The bits of this structure can be directly reinterpreted as an
-* integer-packed color which uses the SDL_PIXELFORMAT_RGBA32 format
-* (SDL_PIXELFORMAT_ABGR8888 on little-endian systems and
-* SDL_PIXELFORMAT_RGBA8888 on big-endian systems).
-*
-* \since This struct is available since SDL 3.2.0.
+    A structure that represents a color as RGBA components.
+
+    The bits of this structure can be directly reinterpreted as an
+    integer-packed color which uses the SDL_PIXELFORMAT_RGBA32 format
+    (SDL_PIXELFORMAT_ABGR8888 on little-endian systems and
+    SDL_PIXELFORMAT_RGBA8888 on big-endian systems).
 */
 struct SDL_Color {
     Uint8 r;
@@ -594,8 +564,6 @@ struct SDL_Color {
 /**
 * The bits of this structure can be directly reinterpreted as a float-packed
 * color which uses the SDL_PIXELFORMAT_RGBA128_FLOAT format
-*
-* \since This struct is available since SDL 3.2.0.
 */
 struct SDL_FColor {
     float r;
@@ -605,11 +573,10 @@ struct SDL_FColor {
 }
 
 /**
-* A set of indexed colors representing a palette.
-*
-* \since This struct is available since SDL 3.2.0.
-*
-* \sa SDL_SetPaletteColors
+    A set of indexed colors representing a palette.
+
+    See_Also:
+        $(D SDL_SetPaletteColors)
 */
 struct SDL_Palette {
     int ncolors;        /**< number of elements in `colors`. */
@@ -619,9 +586,7 @@ struct SDL_Palette {
 }
 
 /**
-* Details about the format of a pixel.
-*
-* \since This struct is available since SDL 3.2.0.
+    Details about the format of a pixel.
 */
 struct SDL_PixelFormatDetails {
     SDL_PixelFormat format;
@@ -643,261 +608,285 @@ struct SDL_PixelFormatDetails {
 }
 
 /**
- * Get the human readable name of a pixel format.
- *
- * \param format the pixel format to query.
- * \returns the human readable name of the specified pixel format or
- *          "SDL_PIXELFORMAT_UNKNOWN" if the format isn't recognized.
- *
- * \threadsafety It is safe to call this function from any thread.
- *
- * \since This function is available since SDL 3.2.0.
- */
+    Get the human readable name of a pixel format.
+
+    Params:
+        format = the pixel format to query.
+    
+    Returns:
+        The human readable name of the specified pixel format or
+        "SDL_PIXELFORMAT_UNKNOWN" if the format isn't recognized.
+
+    Threadsafety:
+        It is safe to call this function from any thread.
+*/
 extern const(char)*  SDL_GetPixelFormatName(SDL_PixelFormat format);
 
 /**
- * Convert one of the enumerated pixel formats to a bpp value and RGBA masks.
- *
- * \param format one of the SDL_PixelFormat values.
- * \param bpp a bits per pixel value; usually 15, 16, or 32.
- * \param Rmask a pointer filled in with the red mask for the format.
- * \param Gmask a pointer filled in with the green mask for the format.
- * \param Bmask a pointer filled in with the blue mask for the format.
- * \param Amask a pointer filled in with the alpha mask for the format.
- * \returns true on success or false on failure; call SDL_GetError() for more
- *          information.
- *
- * \threadsafety It is safe to call this function from any thread.
- *
- * \since This function is available since SDL 3.2.0.
- *
- * \sa SDL_GetPixelFormatForMasks
- */
+    Convert one of the enumerated pixel formats to a bpp value and RGBA masks.
+
+    Params:
+        format =    one of the SDL_PixelFormat values.
+        bpp =       a bits per pixel value; usually 15, 16, or 32.
+        Rmask =     a pointer filled in with the red mask for the format.
+        Gmask =     a pointer filled in with the green mask for the format.
+        Bmask =     a pointer filled in with the blue mask for the format.
+        Amask =     a pointer filled in with the alpha mask for the format.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        It is safe to call this function from any thread.
+
+    See_Also:
+        $(D SDL_GetPixelFormatForMasks)
+*/
 extern bool SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int* bpp, Uint32* Rmask, Uint32* Gmask, Uint32* Bmask, Uint32* Amask);
 
 /**
- * Convert a bpp value and RGBA masks to an enumerated pixel format.
- *
- * This will return `SDL_PIXELFORMAT_UNKNOWN` if the conversion wasn't
- * possible.
- *
- * \param bpp a bits per pixel value; usually 15, 16, or 32.
- * \param Rmask the red mask for the format.
- * \param Gmask the green mask for the format.
- * \param Bmask the blue mask for the format.
- * \param Amask the alpha mask for the format.
- * \returns the SDL_PixelFormat value corresponding to the format masks, or
- *          SDL_PIXELFORMAT_UNKNOWN if there isn't a match.
- *
- * \threadsafety It is safe to call this function from any thread.
- *
- * \since This function is available since SDL 3.2.0.
- *
- * \sa SDL_GetMasksForPixelFormat
- */
+    Convert a bpp value and RGBA masks to an enumerated pixel format.
+
+    This will return `SDL_PIXELFORMAT_UNKNOWN` if the conversion wasn't
+    possible.
+
+    Params:
+        bpp =   a bits per pixel value; usually 15, 16, or 32.
+        Rmask = the red mask for the format.
+        Gmask = the green mask for the format.
+        Bmask = the blue mask for the format.
+        Amask = the alpha mask for the format.
+    
+    Returns:
+        the SDL_PixelFormat value corresponding to the format masks, or
+        SDL_PIXELFORMAT_UNKNOWN if there isn't a match.
+
+    Threadsafety:
+        It is safe to call this function from any thread.
+
+    See_Also:
+        $(D SDL_GetMasksForPixelFormat)
+*/
 extern SDL_PixelFormat SDL_GetPixelFormatForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask);
 
 /**
- * Create an SDL_PixelFormatDetails structure corresponding to a pixel format.
- *
- * Returned structure may come from a shared global cache (i.e. not newly
- * allocated), and hence should not be modified, especially the palette. Weird
- * errors such as `Blit combination not supported` may occur.
- *
- * \param format one of the SDL_PixelFormat values.
- * \returns a pointer to a SDL_PixelFormatDetails structure or NULL on
- *          failure; call SDL_GetError() for more information.
- *
- * \threadsafety It is safe to call this function from any thread.
- *
- * \since This function is available since SDL 3.2.0.
- */
+    Create an SDL_PixelFormatDetails structure corresponding to a pixel format.
+
+    Returned structure may come from a shared global cache (i.e. not newly
+    allocated), and hence should not be modified, especially the palette. Weird
+    errors such as `Blit combination not supported` may occur.
+
+    Params:
+        format = one of the SDL_PixelFormat values.
+    
+    Returns:
+        a pointer to a SDL_PixelFormatDetails structure or NULL on
+        failure; call SDL_GetError() for more information.
+
+    Threadsafety:
+        It is safe to call this function from any thread.
+*/
 extern const(SDL_PixelFormatDetails)* SDL_GetPixelFormatDetails(SDL_PixelFormat format);
 
 /**
- * Create a palette structure with the specified number of color entries.
- *
- * The palette entries are initialized to white.
- *
- * \param ncolors represents the number of color entries in the color palette.
- * \returns a new SDL_Palette structure on success or NULL on failure (e.g. if
- *          there wasn't enough memory); call SDL_GetError() for more
- *          information.
- *
- * \threadsafety It is safe to call this function from any thread.
- *
- * \since This function is available since SDL 3.2.0.
- *
- * \sa SDL_DestroyPalette
- * \sa SDL_SetPaletteColors
- * \sa SDL_SetSurfacePalette
- */
+    Create a palette structure with the specified number of color entries.
+
+    The palette entries are initialized to white.
+
+    Params:
+        ncolors = represents the number of color entries in the color palette.
+    
+    Returns:
+        a new SDL_Palette structure on success or NULL on failure (e.g. if
+        there wasn't enough memory); call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        It is safe to call this function from any thread.
+
+    See_Also:
+        $(D SDL_DestroyPalette)
+        $(D SDL_SetPaletteColors)
+        $(D SDL_SetSurfacePalette)
+*/
 extern SDL_Palette* SDL_CreatePalette(int ncolors);
 
 /**
- * Set a range of colors in a palette.
- *
- * \param palette the SDL_Palette structure to modify.
- * \param colors an array of SDL_Color structures to copy into the palette.
- * \param firstcolor the index of the first palette entry to modify.
- * \param ncolors the number of entries to modify.
- * \returns true on success or false on failure; call SDL_GetError() for more
- *          information.
- *
- * \threadsafety It is safe to call this function from any thread, as long as
- *               the palette is not modified or destroyed in another thread.
- *
- * \since This function is available since SDL 3.2.0.
- */
+    Set a range of colors in a palette.
+
+    Params:
+        palette =       the SDL_Palette structure to modify.
+        colors =        an array of SDL_Color structures to copy into the palette.
+        firstcolor =    the index of the first palette entry to modify.
+        ncolors =       the number of entries to modify.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        It is safe to call this function from any thread, as long as
+        the palette is not modified or destroyed in another thread.
+*/
 extern bool SDL_SetPaletteColors(SDL_Palette* palette, const(SDL_Color)* colors, int firstcolor, int ncolors);
 
 /**
- * Free a palette created with SDL_CreatePalette().
- *
- * \param palette the SDL_Palette structure to be freed.
- *
- * \threadsafety It is safe to call this function from any thread, as long as
- *               the palette is not modified or destroyed in another thread.
- *
- * \since This function is available since SDL 3.2.0.
- *
- * \sa SDL_CreatePalette
- */
+    Free a palette created with SDL_CreatePalette().
+
+    Params:
+        palette the SDL_Palette structure to be freed.
+
+    Threadsafety:
+        It is safe to call this function from any thread, as long as
+        the palette is not modified or destroyed in another thread.
+
+    See_Also:
+        $(D SDL_CreatePalette)
+*/
 extern void SDL_DestroyPalette(SDL_Palette* palette);
 
 /**
- * Map an RGB triple to an opaque pixel value for a given pixel format.
- *
- * This function maps the RGB color value to the specified pixel format and
- * returns the pixel value best approximating the given RGB color value for
- * the given pixel format.
- *
- * If the format has a palette (8-bit) the index of the closest matching color
- * in the palette will be returned.
- *
- * If the specified pixel format has an alpha component it will be returned as
- * all 1 bits (fully opaque).
- *
- * If the pixel format bpp (color depth) is less than 32-bpp then the unused
- * upper bits of the return value can safely be ignored (e.g., with a 16-bpp
- * format the return value can be assigned to a Uint16, and similarly a Uint8
- * for an 8-bpp format).
- *
- * \param format a pointer to SDL_PixelFormatDetails describing the pixel
- *               format.
- * \param palette an optional palette for indexed formats, may be NULL.
- * \param r the red component of the pixel in the range 0-255.
- * \param g the green component of the pixel in the range 0-255.
- * \param b the blue component of the pixel in the range 0-255.
- * \returns a pixel value.
- *
- * \threadsafety It is safe to call this function from any thread, as long as
- *               the palette is not modified.
- *
- * \since This function is available since SDL 3.2.0.
- *
- * \sa SDL_GetPixelFormatDetails
- * \sa SDL_GetRGB
- * \sa SDL_MapRGBA
- * \sa SDL_MapSurfaceRGB
- */
+    Map an RGB triple to an opaque pixel value for a given pixel format.
+
+    This function maps the RGB color value to the specified pixel format and
+    returns the pixel value best approximating the given RGB color value for
+    the given pixel format.
+
+    If the format has a palette (8-bit) the index of the closest matching color
+    in the palette will be returned.
+
+    If the specified pixel format has an alpha component it will be returned as
+    all 1 bits (fully opaque).
+
+    If the pixel format bpp (color depth) is less than 32-bpp then the unused
+    upper bits of the return value can safely be ignored (e.g., with a 16-bpp
+    format the return value can be assigned to a Uint16, and similarly a Uint8
+    for an 8-bpp format).
+
+    Params:
+        format =    a pointer to SDL_PixelFormatDetails describing the pixel
+                    format.
+        palette =   an optional palette for indexed formats, may be NULL.
+        r =         the red component of the pixel in the range 0-255.
+        g =         the green component of the pixel in the range 0-255.
+        b =         the blue component of the pixel in the range 0-255.
+    
+    Returns:
+        a pixel value.
+
+    Threadsafety:
+        It is safe to call this function from any thread, as long as
+        the palette is not modified.
+
+    See_Also:
+        $(D SDL_GetPixelFormatDetails)
+        $(D SDL_GetRGB)
+        $(D SDL_MapRGBA)
+        $(D SDL_MapSurfaceRGB)
+*/
 extern Uint32 SDL_MapRGB(const(SDL_PixelFormatDetails)* format, const(SDL_Palette)* palette, Uint8 r, Uint8 g, Uint8 b);
 
 /**
- * Map an RGBA quadruple to a pixel value for a given pixel format.
- *
- * This function maps the RGBA color value to the specified pixel format and
- * returns the pixel value best approximating the given RGBA color value for
- * the given pixel format.
- *
- * If the specified pixel format has no alpha component the alpha value will
- * be ignored (as it will be in formats with a palette).
- *
- * If the format has a palette (8-bit) the index of the closest matching color
- * in the palette will be returned.
- *
- * If the pixel format bpp (color depth) is less than 32-bpp then the unused
- * upper bits of the return value can safely be ignored (e.g., with a 16-bpp
- * format the return value can be assigned to a Uint16, and similarly a Uint8
- * for an 8-bpp format).
- *
- * \param format a pointer to SDL_PixelFormatDetails describing the pixel
- *               format.
- * \param palette an optional palette for indexed formats, may be NULL.
- * \param r the red component of the pixel in the range 0-255.
- * \param g the green component of the pixel in the range 0-255.
- * \param b the blue component of the pixel in the range 0-255.
- * \param a the alpha component of the pixel in the range 0-255.
- * \returns a pixel value.
- *
- * \threadsafety It is safe to call this function from any thread, as long as
- *               the palette is not modified.
- *
- * \since This function is available since SDL 3.2.0.
- *
- * \sa SDL_GetPixelFormatDetails
- * \sa SDL_GetRGBA
- * \sa SDL_MapRGB
- * \sa SDL_MapSurfaceRGBA
- */
+    Map an RGBA quadruple to a pixel value for a given pixel format.
+
+    This function maps the RGBA color value to the specified pixel format and
+    returns the pixel value best approximating the given RGBA color value for
+    the given pixel format.
+
+    If the specified pixel format has no alpha component the alpha value will
+    be ignored (as it will be in formats with a palette).
+
+    If the format has a palette (8-bit) the index of the closest matching color
+    in the palette will be returned.
+
+    If the pixel format bpp (color depth) is less than 32-bpp then the unused
+    upper bits of the return value can safely be ignored (e.g., with a 16-bpp
+    format the return value can be assigned to a Uint16, and similarly a Uint8
+    for an 8-bpp format).
+
+    Params:
+        format      a pointer to SDL_PixelFormatDetails describing the pixel
+                    format.
+        palette =   an optional palette for indexed formats, may be NULL.
+        r =         the red component of the pixel in the range 0-255.
+        g =         the green component of the pixel in the range 0-255.
+        b =         the blue component of the pixel in the range 0-255.
+        a =         the alpha component of the pixel in the range 0-255.
+    
+    Returns:
+        a pixel value.
+
+    Threadsafety:
+        It is safe to call this function from any thread, as long as
+        the palette is not modified.
+
+    See_Also:
+        $(D SDL_GetPixelFormatDetails)
+        $(D SDL_GetRGBA)
+        $(D SDL_MapRGB)
+        $(D SDL_MapSurfaceRGBA)
+*/
 extern Uint32 SDL_MapRGBA(const(SDL_PixelFormatDetails)* format, const(SDL_Palette)* palette, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 /**
- * Get RGB values from a pixel in the specified format.
- *
- * This function uses the entire 8-bit [0..255] range when converting color
- * components from pixel formats with less than 8-bits per RGB component
- * (e.g., a completely white pixel in 16-bit RGB565 format would return [0xff,
- * 0xff, 0xff] not [0xf8, 0xfc, 0xf8]).
- *
- * \param pixel a pixel value.
- * \param format a pointer to SDL_PixelFormatDetails describing the pixel
- *               format.
- * \param palette an optional palette for indexed formats, may be NULL.
- * \param r a pointer filled in with the red component, may be NULL.
- * \param g a pointer filled in with the green component, may be NULL.
- * \param b a pointer filled in with the blue component, may be NULL.
- *
- * \threadsafety It is safe to call this function from any thread, as long as
- *               the palette is not modified.
- *
- * \since This function is available since SDL 3.2.0.
- *
- * \sa SDL_GetPixelFormatDetails
- * \sa SDL_GetRGBA
- * \sa SDL_MapRGB
- * \sa SDL_MapRGBA
- */
+    Get RGB values from a pixel in the specified format.
+
+    This function uses the entire 8-bit [0..255] range when converting color
+    components from pixel formats with less than 8-bits per RGB component
+    (e.g., a completely white pixel in 16-bit RGB565 format would return [0xff,
+    0xff, 0xff] not [0xf8, 0xfc, 0xf8]).
+
+    Params:
+        pixel =     a pixel value.
+        format =    a pointer to SDL_PixelFormatDetails describing the pixel
+                    format.
+        palette =   an optional palette for indexed formats, may be NULL.
+        r =         a pointer filled in with the red component, may be NULL.
+        g =         a pointer filled in with the green component, may be NULL.
+        b =         a pointer filled in with the blue component, may be NULL.
+
+    Threadsafety:
+        It is safe to call this function from any thread, as long as
+        the palette is not modified.
+
+    See_Also:
+        $(D SDL_GetPixelFormatDetails)
+        $(D SDL_GetRGBA)
+        $(D SDL_MapRGB)
+        $(D SDL_MapRGBA)
+*/
 extern void SDL_GetRGB(Uint32 pixel, const(SDL_PixelFormatDetails)* format, const(SDL_Palette)* palette, Uint8* r, Uint8* g, Uint8* b);
 
 /**
- * Get RGBA values from a pixel in the specified format.
- *
- * This function uses the entire 8-bit [0..255] range when converting color
- * components from pixel formats with less than 8-bits per RGB component
- * (e.g., a completely white pixel in 16-bit RGB565 format would return [0xff,
- * 0xff, 0xff] not [0xf8, 0xfc, 0xf8]).
- *
- * If the surface has no alpha component, the alpha will be returned as 0xff
- * (100% opaque).
- *
- * \param pixel a pixel value.
- * \param format a pointer to SDL_PixelFormatDetails describing the pixel
- *               format.
- * \param palette an optional palette for indexed formats, may be NULL.
- * \param r a pointer filled in with the red component, may be NULL.
- * \param g a pointer filled in with the green component, may be NULL.
- * \param b a pointer filled in with the blue component, may be NULL.
- * \param a a pointer filled in with the alpha component, may be NULL.
- *
- * \threadsafety It is safe to call this function from any thread, as long as
- *               the palette is not modified.
- *
- * \since This function is available since SDL 3.2.0.
- *
- * \sa SDL_GetPixelFormatDetails
- * \sa SDL_GetRGB
- * \sa SDL_MapRGB
- * \sa SDL_MapRGBA
- */
+    Get RGBA values from a pixel in the specified format.
+
+    This function uses the entire 8-bit [0..255] range when converting color
+    components from pixel formats with less than 8-bits per RGB component
+    (e.g., a completely white pixel in 16-bit RGB565 format would return [0xff,
+    0xff, 0xff] not [0xf8, 0xfc, 0xf8]).
+
+    If the surface has no alpha component, the alpha will be returned as 0xff
+    (100% opaque).
+
+    Params:
+        pixel =     a pixel value.
+        format =    a pointer to SDL_PixelFormatDetails describing the pixel
+                    format.
+        palette =   an optional palette for indexed formats, may be NULL.
+        r =         a pointer filled in with the red component, may be NULL.
+        g =         a pointer filled in with the green component, may be NULL.
+        b =         a pointer filled in with the blue component, may be NULL.
+        a =         a pointer filled in with the alpha component, may be NULL.
+
+    Threadsafety:
+        It is safe to call this function from any thread, as long as
+        the palette is not modified.
+
+    See_Also:
+        $(D SDL_GetPixelFormatDetails)
+        $(D SDL_GetRGB)
+        $(D SDL_MapRGB)
+        $(D SDL_MapRGBA)
+*/
 extern void SDL_GetRGBA(Uint32 pixel, const(SDL_PixelFormatDetails)* format, const(SDL_Palette)* palette, Uint8* r, Uint8* g, Uint8* b, Uint8* a);

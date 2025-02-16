@@ -56,7 +56,6 @@ import sdl.stdc;
 
 extern(C) nothrow @nogc:
 
-
 /**
     Put UTF-8 text into the clipboard.
 

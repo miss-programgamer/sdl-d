@@ -60,17 +60,11 @@ extern(C) nothrow @nogc:
 
 /**
     A handle to a CAMetalLayer-backed NSView (macOS) or UIView (iOS/tvOS).
-    
-    History:
-        Available since SDL 3.2.0.
 */
 alias SDL_MetalView = OpaqueHandle!("SDL_MetalView");
 
 /**
     A handle to a CAMetalLayer.
-    
-    History:
-        Available since SDL 3.2.0.
 */
 alias SDL_MetalLayer = OpaqueHandle!("SDL_MetalLayer");
 
@@ -93,9 +87,6 @@ alias SDL_MetalLayer = OpaqueHandle!("SDL_MetalLayer");
     See_Also:
         $(D SDL_Metal_DestroyView)
         $(D SDL_Metal_GetLayer)
-
-    History:
-        Available since SDL 3.2.0.
 */
 extern SDL_MetalView SDL_Metal_CreateView(SDL_Window* window);
 
@@ -110,9 +101,6 @@ extern SDL_MetalView SDL_Metal_CreateView(SDL_Window* window);
 
     See_Also:
         $(D SDL_Metal_CreateView)
-
-    History:
-        Available since SDL 3.2.0.
 */
 extern void SDL_Metal_DestroyView(SDL_MetalView view);
 
@@ -127,8 +115,5 @@ extern void SDL_Metal_DestroyView(SDL_MetalView view);
 
     See_Also:
         $(D SDL_Metal_CreateView)
-
-    History:
-        Available since SDL 3.2.0.
 */
 extern SDL_MetalLayer SDL_Metal_GetLayer(SDL_MetalView view);
