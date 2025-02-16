@@ -44,7 +44,7 @@
     SDL Dialog
 
     See_Also:
-        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryDialog, SDL3 MessageBox Documentation)
+        $(LINK2 https://wiki.libsdl.org/SDL3/CategoryDialog, SDL3 Dialog Documentation)
     
     Copyright: © 2025 Inochi2D Project, © 1997-2025 Sam Lantinga
     License: Subject to the terms of the Zlib License, as written in the LICENSE file.
@@ -77,8 +77,8 @@ extern(C) nothrow @nogc:
         $(D SDL_ShowFileDialogWithProperties)
 */
 struct SDL_DialogFileFilter {
-    const(char)* *name;
-    const(char)* *pattern;
+    const(char)** name;
+    const(char)** pattern;
 }
 
 /**
@@ -118,7 +118,7 @@ struct SDL_DialogFileFilter {
         $(D SDL_ShowOpenFolderDialog)
         $(D SDL_ShowFileDialogWithProperties)
 */
-alias SDL_DialogFileCallback = void function(void *userdata, const(const(char)*)* filelist, int filter);
+alias SDL_DialogFileCallback = void function(void* userdata, const(const(char)*)* filelist, int filter);
 
 /**
     Displays a dialog that lets the user select a file on their filesystem.
@@ -170,7 +170,8 @@ alias SDL_DialogFileCallback = void function(void *userdata, const(const(char)*)
         $(D SDL_ShowOpenFolderDialog)
         $(D SDL_ShowFileDialogWithProperties)
 */
-extern void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const(SDL_DialogFileFilter)* *filters, int nfilters, const(char)* *default_location, bool allow_many);
+extern void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void* userdata, SDL_Window* window, const(
+        SDL_DialogFileFilter)** filters, int nfilters, const(char)** default_location, bool allow_many);
 
 /**
     Displays a dialog that lets the user choose a new or existing file on their
@@ -220,7 +221,8 @@ extern void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void *userda
         $(D SDL_ShowOpenFolderDialog)
         $(D SDL_ShowFileDialogWithProperties)
 */
-extern void SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const(SDL_DialogFileFilter)* *filters, int nfilters, const(char)** default_location);
+extern void SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, void* userdata, SDL_Window* window, const(
+        SDL_DialogFileFilter)** filters, int nfilters, const(char)** default_location);
 
 /**
     Displays a dialog that lets the user select a folder on their filesystem.
@@ -266,7 +268,8 @@ extern void SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, void *userda
         $(D SDL_ShowSaveFileDialog)
         $(D SDL_ShowFileDialogWithProperties)
 */
-extern void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const(char)* *default_location, bool allow_many);
+extern void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void* userdata, SDL_Window* window, const(
+        char)** default_location, bool allow_many);
 
 /**
     Various types of file dialogs.
@@ -331,13 +334,13 @@ enum SDL_FileDialogType {
         $(D SDL_ShowSaveFileDialog)
         $(D SDL_ShowOpenFolderDialog)
 */
-extern void SDL_ShowFileDialogWithProperties(SDL_FileDialogType type, SDL_DialogFileCallback callback, void *userdata, SDL_PropertiesID props);
+extern void SDL_ShowFileDialogWithProperties(SDL_FileDialogType type, SDL_DialogFileCallback callback, void* userdata, SDL_PropertiesID props);
 
-enum SDL_PROP_FILE_DIALOG_FILTERS_POINTER =     "SDL.filedialog.filters";
-enum SDL_PROP_FILE_DIALOG_NFILTERS_NUMBER =     "SDL.filedialog.nfilters";
-enum SDL_PROP_FILE_DIALOG_WINDOW_POINTER =      "SDL.filedialog.window";
-enum SDL_PROP_FILE_DIALOG_LOCATION_STRING =     "SDL.filedialog.location";
-enum SDL_PROP_FILE_DIALOG_MANY_BOOLEAN =        "SDL.filedialog.many";
-enum SDL_PROP_FILE_DIALOG_TITLE_STRING =        "SDL.filedialog.title";
-enum SDL_PROP_FILE_DIALOG_ACCEPT_STRING =       "SDL.filedialog.accept";
-enum SDL_PROP_FILE_DIALOG_CANCEL_STRING =       "SDL.filedialog.cancel";
+enum SDL_PROP_FILE_DIALOG_FILTERS_POINTER = "SDL.filedialog.filters";
+enum SDL_PROP_FILE_DIALOG_NFILTERS_NUMBER = "SDL.filedialog.nfilters";
+enum SDL_PROP_FILE_DIALOG_WINDOW_POINTER = "SDL.filedialog.window";
+enum SDL_PROP_FILE_DIALOG_LOCATION_STRING = "SDL.filedialog.location";
+enum SDL_PROP_FILE_DIALOG_MANY_BOOLEAN = "SDL.filedialog.many";
+enum SDL_PROP_FILE_DIALOG_TITLE_STRING = "SDL.filedialog.title";
+enum SDL_PROP_FILE_DIALOG_ACCEPT_STRING = "SDL.filedialog.accept";
+enum SDL_PROP_FILE_DIALOG_CANCEL_STRING = "SDL.filedialog.cancel";
