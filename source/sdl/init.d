@@ -81,6 +81,11 @@ enum SDL_InitFlags SDL_INIT_EVENTS = 0x00004000u;
 enum SDL_InitFlags SDL_INIT_SENSOR = 0x00008000u; /** $(D SDL_INIT_SENSOR) implies $(D SDL_INIT_EVENTS) */
 enum SDL_InitFlags SDL_INIT_CAMERA = 0x00010000u; /** $(D SDL_INIT_CAMERA) implies $(D SDL_INIT_EVENTS) */
 
+enum SDL_InitFlags SDL_INIT_EVERYTHING = 
+    SDL_INIT_AUDIO | SDL_INIT_VIDEO | 
+    SDL_INIT_GAMEPAD | SDL_INIT_CAMERA | 
+    SDL_INIT_SENSOR;
+
 /**
     Return values for optional main callbacks.
 
