@@ -118,4 +118,4 @@ enum SDL_PowerState {
         The current battery state or `SDL_POWERSTATE_ERROR` on failure;
         call SDL_GetError() for more information.
 */
-extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetPowerInfo(int *seconds, int *percent);
+extern SDL_PowerState SDL_GetPowerInfo(int *seconds, int *percent);

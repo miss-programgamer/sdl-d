@@ -120,7 +120,7 @@ enum SDL_JoystickConnectionState {
     See_Also:
         $(D SDL_JOYSTICK_AXIS_MIN)
 */
-enum SDL_JOYSTICK_AXIS_MAX  = 32_767;
+enum SDL_JOYSTICK_AXIS_MAX = 32_767;
 
 /**
     The smallest value an SDL_Joystick's axis can report.
@@ -131,7 +131,6 @@ enum SDL_JOYSTICK_AXIS_MAX  = 32_767;
         $(D SDL_JOYSTICK_AXIS_MAX)
 */
 enum SDL_JOYSTICK_AXIS_MIN = -32_768;
-
 
 /**
     Locking for atomic access to the joystick API.
@@ -174,7 +173,7 @@ extern bool SDL_HasJoystick();
         $(D SDL_HasJoystick)
         $(D SDL_OpenJoystick)
 */
-extern SDL_JoystickID*  SDL_GetJoysticks(int* count);
+extern SDL_JoystickID* SDL_GetJoysticks(int* count);
 
 /**
     Get the implementation dependent name of a joystick.
@@ -192,7 +191,7 @@ extern SDL_JoystickID*  SDL_GetJoysticks(int* count);
         $(D SDL_GetJoystickName)
         $(D SDL_GetJoysticks)
 */
-extern const(char)*  SDL_GetJoystickNameForID(SDL_JoystickID instance_id);
+extern const(char)* SDL_GetJoystickNameForID(SDL_JoystickID instance_id);
 
 /**
     Get the implementation dependent path of a joystick.
@@ -210,7 +209,7 @@ extern const(char)*  SDL_GetJoystickNameForID(SDL_JoystickID instance_id);
         $(D SDL_GetJoystickPath)
         $(D SDL_GetJoysticks)
 */
-extern const(char)*  SDL_GetJoystickPathForID(SDL_JoystickID instance_id);
+extern const(char)* SDL_GetJoystickPathForID(SDL_JoystickID instance_id);
 
 /**
     Get the player index of a joystick.
@@ -339,7 +338,7 @@ extern SDL_JoystickType SDL_GetJoystickTypeForID(SDL_JoystickID instance_id);
     See_Also:
         $(D SDL_CloseJoystick)
 */
-extern SDL_Joystick*  SDL_OpenJoystick(SDL_JoystickID instance_id);
+extern SDL_Joystick* SDL_OpenJoystick(SDL_JoystickID instance_id);
 
 /**
     Get the SDL_Joystick associated with an instance ID, if it has been opened.
@@ -351,7 +350,7 @@ extern SDL_Joystick*  SDL_OpenJoystick(SDL_JoystickID instance_id);
         An SDL_Joystick on success or NULL on failure or if it hasn't been
         opened yet; call SDL_GetError() for more information.
 */
-extern SDL_Joystick*  SDL_GetJoystickFromID(SDL_JoystickID instance_id);
+extern SDL_Joystick* SDL_GetJoystickFromID(SDL_JoystickID instance_id);
 
 /**
     Get the SDL_Joystick associated with a player index.
@@ -367,7 +366,7 @@ extern SDL_Joystick*  SDL_GetJoystickFromID(SDL_JoystickID instance_id);
         $(D SDL_GetJoystickPlayerIndex)
         $(D SDL_SetJoystickPlayerIndex)
 */
-extern SDL_Joystick*  SDL_GetJoystickFromPlayerIndex(int player_index);
+extern SDL_Joystick* SDL_GetJoystickFromPlayerIndex(int player_index);
 
 /**
     The structure that describes a virtual joystick touchpad.
@@ -376,7 +375,7 @@ extern SDL_Joystick*  SDL_GetJoystickFromPlayerIndex(int player_index);
         $(D SDL_VirtualJoystickDesc)
 */
 struct SDL_VirtualJoystickTouchpadDesc {
-    
+
     /**
         The number of simultaneous fingers on this touchpad
     */
@@ -391,12 +390,12 @@ struct SDL_VirtualJoystickTouchpadDesc {
         $(D SDL_VirtualJoystickDesc)
 */
 struct SDL_VirtualJoystickSensorDesc {
-    
+
     /**
         The type of this sensor
     */
     SDL_SensorType type;
-    
+
     /**
         The update frequency of this sensor, may be 0.0f
     */
@@ -416,62 +415,62 @@ struct SDL_VirtualJoystickSensorDesc {
         $(D SDL_VirtualJoystickTouchpadDesc)
 */
 struct SDL_VirtualJoystickDesc {
-    
+
     /**
         the version of this interface
     */
-    Uint32 version_;   
-    
+    Uint32 version_;
+
     /**
         `SDL_JoystickType`
     */
-    Uint16 type;       
-    
+    Uint16 type;
+
     /**
         unused
     */
-    Uint16 padding;    
-    
+    Uint16 padding;
+
     /**
         the USB vendor ID of this joystick
     */
-    Uint16 vendor_id;  
-    
+    Uint16 vendor_id;
+
     /**
         the USB product ID of this joystick
     */
-    Uint16 product_id; 
-    
+    Uint16 product_id;
+
     /**
         the number of axes on this joystick
     */
-    Uint16 naxes;      
-    
+    Uint16 naxes;
+
     /**
         the number of buttons on this joystick
     */
-    Uint16 nbuttons;   
-    
+    Uint16 nbuttons;
+
     /**
         the number of balls on this joystick
     */
-    Uint16 nballs;     
-    
+    Uint16 nballs;
+
     /**
         the number of hats on this joystick
     */
-    Uint16 nhats;      
-    
+    Uint16 nhats;
+
     /**
         the number of touchpads on this joystick, requires `touchpads` to point at valid descriptions
     */
-    Uint16 ntouchpads; 
-    
+    Uint16 ntouchpads;
+
     /**
         the number of sensors on this joystick, requires `sensors` to point at valid descriptions
     */
-    Uint16 nsensors;   
-    
+    Uint16 nsensors;
+
     /**
         unused
     */
@@ -488,17 +487,17 @@ struct SDL_VirtualJoystickDesc {
         e.g. (1 << SDL_GAMEPAD_AXIS_LEFTX)
     */
     Uint32 axis_mask;
-    
+
     /**
         The name of the joystick
     */
-    const(char)* name;   
-    
+    const(char)* name;
+
     /**
         A pointer to an array of touchpad descriptions, required if `ntouchpads` is > 0
     */
     const(SDL_VirtualJoystickTouchpadDesc)* touchpads;
-    
+
     /**
         A pointer to an array of sensor descriptions, required if `nsensors` is > 0
     */
@@ -508,45 +507,45 @@ struct SDL_VirtualJoystickDesc {
         User data pointer passed to callbacks
     */
     void* userdata;
-    
+
     /**
         Called when the joystick state should be updated
     */
     void function(void* userdata) Update;
-    
+
     /**
         Called when the player index is set
     */
     void function(void* userdata, int player_index) SetPlayerIndex;
-    
+
     /**
         Implements SDL_RumbleJoystick()
     */
-    bool function(void* userdata, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble) Rumble; 
-    
+    bool function(void* userdata, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble) Rumble;
+
     /**
         Implements SDL_RumbleJoystickTriggers()
     */
-    bool function(void* userdata, Uint16 left_rumble, Uint16 right_rumble) RumbleTriggers; 
-    
+    bool function(void* userdata, Uint16 left_rumble, Uint16 right_rumble) RumbleTriggers;
+
     /**
         Implements SDL_SetJoystickLED()
     */
-    bool function(void* userdata, Uint8 red, Uint8 green, Uint8 blue) SetLED; 
-    
+    bool function(void* userdata, Uint8 red, Uint8 green, Uint8 blue) SetLED;
+
     /**
         Implements SDL_SendJoystickEffect()
     */
-    bool function(void* userdata, const void* data, int size) SendEffect; 
+    bool function(void* userdata, const void* data, int size) SendEffect;
     /**
         Implements SDL_SetGamepadSensorEnabled()
     */
-    bool function(void* userdata, bool enabled) SetSensorsEnabled; 
-    
+    bool function(void* userdata, bool enabled) SetSensorsEnabled;
+
     /**
         Cleans up the userdata when the joystick is detached
     */
-    void function(void* userdata) Cleanup; 
+    void function(void* userdata) Cleanup;
 }
 
 /*
@@ -558,8 +557,8 @@ struct SDL_VirtualJoystickDesc {
 */
 static assert(
     ((void*).sizeof == 4 && SDL_VirtualJoystickDesc.sizeof == 84) ||
-    ((void*).sizeof == 8 && SDL_VirtualJoystickDesc.sizeof == 136),
-    "SDL_VirtualJoystickDesc size mismatched!"
+        ((void*).sizeof == 8 && SDL_VirtualJoystickDesc.sizeof == 136),
+        "SDL_VirtualJoystickDesc size mismatched!"
 );
 
 /**
@@ -764,11 +763,11 @@ extern bool SDL_SendJoystickVirtualSensorData(SDL_Joystick* joystick, SDL_Sensor
 */
 extern SDL_PropertiesID SDL_GetJoystickProperties(SDL_Joystick* joystick);
 
-enum SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN =          "SDL.joystick.cap.mono_led";
-enum SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN =           "SDL.joystick.cap.rgb_led";
-enum SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN =        "SDL.joystick.cap.player_led";
-enum SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN =            "SDL.joystick.cap.rumble";
-enum SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN =    "SDL.joystick.cap.trigger_rumble";
+enum SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN = "SDL.joystick.cap.mono_led";
+enum SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN = "SDL.joystick.cap.rgb_led";
+enum SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN = "SDL.joystick.cap.player_led";
+enum SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN = "SDL.joystick.cap.rumble";
+enum SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN = "SDL.joystick.cap.trigger_rumble";
 
 /**
     Get the implementation dependent name of a joystick.
@@ -783,7 +782,7 @@ enum SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN =    "SDL.joystick.cap.trigger
     See_Also:
         $(D SDL_GetJoystickNameForID)
 */
-extern const(char)*  SDL_GetJoystickName(SDL_Joystick* joystick);
+extern const(char)* SDL_GetJoystickName(SDL_Joystick* joystick);
 
 /**
     Get the implementation dependent path of a joystick.
@@ -798,7 +797,7 @@ extern const(char)*  SDL_GetJoystickName(SDL_Joystick* joystick);
     See_Also:
         $(D SDL_GetJoystickPathForID)
 */
-extern const(char)*  SDL_GetJoystickPath(SDL_Joystick* joystick);
+extern const(char)* SDL_GetJoystickPath(SDL_Joystick* joystick);
 
 /**
     Get the player index of an opened joystick.
@@ -927,7 +926,7 @@ extern Uint16 SDL_GetJoystickFirmwareVersion(SDL_Joystick* joystick);
         The serial number of the selected joystick, or NULL if
         unavailable.
 */
-extern const(char)*  SDL_GetJoystickSerial(SDL_Joystick* joystick);
+extern const(char)* SDL_GetJoystickSerial(SDL_Joystick* joystick);
 
 /**
     Get the type of an opened joystick.
@@ -1189,15 +1188,15 @@ extern bool SDL_GetJoystickBall(SDL_Joystick* joystick, int ball, int* dx, int* 
 */
 extern Uint8 SDL_GetJoystickHat(SDL_Joystick* joystick, int hat);
 
-enum Uint8 SDL_HAT_CENTERED =    0x00u;
-enum Uint8 SDL_HAT_UP =          0x01u;
-enum Uint8 SDL_HAT_RIGHT =       0x02u;
-enum Uint8 SDL_HAT_DOWN =        0x04u;
-enum Uint8 SDL_HAT_LEFT =        0x08u;
-enum Uint8 SDL_HAT_RIGHTUP =     (SDL_HAT_RIGHT|SDL_HAT_UP);
-enum Uint8 SDL_HAT_RIGHTDOWN =   (SDL_HAT_RIGHT|SDL_HAT_DOWN);
-enum Uint8 SDL_HAT_LEFTUP =      (SDL_HAT_LEFT|SDL_HAT_UP);
-enum Uint8 SDL_HAT_LEFTDOWN =    (SDL_HAT_LEFT|SDL_HAT_DOWN);
+enum Uint8 SDL_HAT_CENTERED = 0x00u;
+enum Uint8 SDL_HAT_UP = 0x01u;
+enum Uint8 SDL_HAT_RIGHT = 0x02u;
+enum Uint8 SDL_HAT_DOWN = 0x04u;
+enum Uint8 SDL_HAT_LEFT = 0x08u;
+enum Uint8 SDL_HAT_RIGHTUP = (SDL_HAT_RIGHT | SDL_HAT_UP);
+enum Uint8 SDL_HAT_RIGHTDOWN = (SDL_HAT_RIGHT | SDL_HAT_DOWN);
+enum Uint8 SDL_HAT_LEFTUP = (SDL_HAT_LEFT | SDL_HAT_UP);
+enum Uint8 SDL_HAT_LEFTDOWN = (SDL_HAT_LEFT | SDL_HAT_DOWN);
 
 /**
     Get the current state of a button on a joystick.
