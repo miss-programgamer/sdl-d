@@ -52,8 +52,666 @@
         Luna Nielsen
 */
 module sdl.keyboard;
+import sdl.keycode;
+import sdl.scancode;
+import sdl.video;
+import sdl.properties;
+import sdl.rect;
 import sdl.stdc;
 
-extern(C) nothrow @nogc:
+extern (C) nothrow @nogc:
 
+/**
+    This is a unique ID for a keyboard for the time it is connected to the
+    system, and is never reused for the lifetime of the application.
+
+    If the keyboard is disconnected and reconnected, it will get a new ID.
+
+    The value 0 is an invalid ID.
+*/
 alias SDL_KeyboardID = Uint32;
+
+/**
+    Return whether a keyboard is currently connected.
+
+    Returns:
+        true if a keyboard is connected, false otherwise.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_GetKeyboards)
+*/
+extern bool SDL_HasKeyboard();
+
+/**
+    Get a list of currently connected keyboards.
+
+    Note that this will include any device or virtual driver that includes
+    keyboard functionality, including some mice, KVM switches, motherboard
+    power buttons, etc. You should wait for input from a device before you
+    consider it actively in use.
+
+    Params:
+        count = a pointer filled in with the number of keyboards returned, may
+                be NULL.
+    
+    Returns:
+        a 0 terminated array of keyboards instance IDs or NULL on failure;
+        call SDL_GetError() for more information. This should be freed
+        with SDL_free() when it is no longer needed.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_GetKeyboardNameForID)
+        $(D SDL_HasKeyboard)
+*/
+extern SDL_KeyboardID* SDL_GetKeyboards(int* count);
+
+/**
+    Get the name of a keyboard.
+
+    This function returns "" if the keyboard doesn't have a name.
+
+    Params:
+        instance_id = the keyboard instance ID.
+
+    Returns:
+        the name of the selected keyboard or NULL on failure; call
+        SDL_GetError() for more information.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_GetKeyboards)
+*/
+extern const(char)* SDL_GetKeyboardNameForID(SDL_KeyboardID instance_id);
+
+/**
+    Query the window which currently has keyboard focus.
+
+    Returns:
+        the window with keyboard focus.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+*/
+extern SDL_Window* SDL_GetKeyboardFocus();
+
+/**
+    Get a snapshot of the current state of the keyboard.
+
+    The pointer returned is a pointer to an internal SDL array. It will be
+    valid for the whole lifetime of the application and should not be freed by
+    the caller.
+
+    A array element with a value of true means that the key is pressed and a
+    value of false means that it is not. Indexes into this array are obtained
+    by using SDL_Scancode values.
+
+    Use SDL_PumpEvents() to update the state array.
+
+    This function gives you the current state after all events have been
+    processed, so if a key or button has been pressed and released before you
+    process events, then the pressed state will never show up in the
+    SDL_GetKeyboardState() calls.
+
+    Note: This function doesn't take into account whether shift has been
+    pressed or not.
+
+    Params:
+        numkeys = if non-NULL, receives the length of the returned array.
+    
+    Returns:
+        a pointer to an array of key states.
+
+    Threadsafety:
+        It is safe to call this function from any thread.
+
+    See_Also:
+        $(D SDL_PumpEvents)
+        $(D SDL_ResetKeyboard)
+*/
+extern const(bool)* SDL_GetKeyboardState(int* numkeys);
+
+/**
+    Clear the state of the keyboard.
+
+    This function will generate key up events for all pressed keys.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_GetKeyboardState)
+*/
+extern void SDL_ResetKeyboard();
+
+/**
+    Get the current key modifier state for the keyboard.
+
+    Returns:
+        an OR'd combination of the modifier keys for the keyboard. See
+        SDL_Keymod for details.
+
+    Threadsafty:
+        It is safe to call this function from any thread.
+
+    See_Also:
+        $(D SDL_GetKeyboardState)
+        $(D SDL_SetModState)
+*/
+extern SDL_Keymod SDL_GetModState();
+
+/**
+    Set the current key modifier state for the keyboard.
+
+    The inverse of SDL_GetModState(), SDL_SetModState() allows you to impose
+    modifier key states on your application. Simply pass your desired modifier
+    states into `modstate`. This value may be a bitwise, OR'd combination of
+    SDL_Keymod values.
+
+    This does not change the keyboard state, only the key modifier flags that
+    SDL reports.
+
+    Params:
+        modstate = the desired SDL_Keymod for the keyboard.
+
+    Threadsafety:
+        It is safe to call this function from any thread.
+
+    See_Also:
+        $(D SDL_GetModState)
+*/
+extern void SDL_SetModState(SDL_Keymod modstate);
+
+/**
+    Get the key code corresponding to the given scancode according to the
+    current keyboard layout.
+
+    If you want to get the keycode as it would be delivered in key events,
+    including options specified in SDL_HINT_KEYCODE_OPTIONS, then you should
+    pass `key_event` as true. Otherwise this function simply translates the
+    scancode based on the given modifier state.
+
+    Params:
+        scancode =  the desired SDL_Scancode to query.
+        modstate =  the modifier state to use when translating the scancode to
+                    a keycode.
+        key_event = true if the keycode will be used in key events.
+    
+    Returns:
+        The SDL_Keycode that corresponds to the given SDL_Scancode.
+
+    Threadsafety:
+        This function is not thread safe.
+
+    See_Also:
+        $(D SDL_GetKeyName)
+        $(D SDL_GetScancodeFromKey)
+*/
+extern SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, bool key_event);
+
+/**
+    Get the scancode corresponding to the given key code according to the
+    current keyboard layout.
+
+    Note that there may be multiple scancode+modifier states that can generate
+    this keycode, this will just return the first one found.
+
+    Params:
+        key =       the desired SDL_Keycode to query.
+        modstate =  a pointer to the modifier state that would be used when the
+                    scancode generates this key, may be NULL.
+    
+    Returns:
+        The SDL_Scancode that corresponds to the given SDL_Keycode.
+
+    Threadsafety:
+        This function is not thread safe.
+
+    See_Also:
+        $(D SDL_GetKeyFromScancode)
+        $(D SDL_GetScancodeName)
+*/
+extern SDL_Scancode SDL_GetScancodeFromKey(SDL_Keycode key, SDL_Keymod* modstate);
+
+/**
+    Set a human-readable name for a scancode.
+
+    Params:
+        scancode =  the desired SDL_Scancode.
+        name =      the name to use for the scancode, encoded as UTF-8. The string
+                    is not copied, so the pointer given to this function must stay
+                    valid while SDL is being used.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        This function is not thread safe.
+
+    See_Also:
+        $(D SDL_GetScancodeName)
+*/
+extern bool SDL_SetScancodeName(SDL_Scancode scancode, const(char)* name);
+
+/**
+    Get a human-readable name for a scancode.
+
+    **Warning**: The returned name is by design not stable across platforms,
+    e.g. the name for `SDL_SCANCODE_LGUI` is "Left GUI" under Linux but "Left
+    Windows" under Microsoft Windows, and some scancodes like
+    `SDL_SCANCODE_NONUSBACKSLASH` don't have any name at all. There are even
+    scancodes that share names, e.g. `SDL_SCANCODE_RETURN` and
+    `SDL_SCANCODE_RETURN2` (both called "Return"). This function is therefore
+    unsuitable for creating a stable cross-platform two-way mapping between
+    strings and scancodes.
+
+    Params:
+        scancode =  the desired SDL_Scancode to query.
+    
+    Returns:
+        a pointer to the name for the scancode. If the scancode doesn't
+        have a name this function returns an empty string ("").
+
+    Threadsafety:
+        This function is not thread safe.
+
+    See_Also:
+        $(D SDL_GetScancodeFromKey)
+        $(D SDL_GetScancodeFromName)
+        $(D SDL_SetScancodeName)
+*/
+extern const(char)* SDL_GetScancodeName(SDL_Scancode scancode);
+
+/**
+    Get a scancode from a human-readable name.
+
+    Params:
+        name = the human-readable scancode name.
+    
+    Returns:
+        The SDL_Scancode, or `SDL_SCANCODE_UNKNOWN` if the name wasn't
+        recognized; call SDL_GetError() for more information.
+
+    Threadsafety:
+        This function is not thread safe.
+
+    See_Also:
+        $(D SDL_GetKeyFromName)
+        $(D SDL_GetScancodeFromKey)
+        $(D SDL_GetScancodeName)
+*/
+extern SDL_Scancode SDL_GetScancodeFromName(const(char)* name);
+
+/**
+    Get a human-readable name for a key.
+
+    If the key doesn't have a name, this function returns an empty string ("").
+
+    Letters will be presented in their uppercase form, if applicable.
+
+    Params:
+        key = the desired SDL_Keycode to query.
+    
+    Returns:
+        a UTF-8 encoded string of the key name.
+
+    Threadsafety:
+        This function is not thread safe.
+
+    See_Also:
+        $(D SDL_GetKeyFromName)
+        $(D SDL_GetKeyFromScancode)
+        $(D SDL_GetScancodeFromKey)
+*/
+extern const(char)* SDL_GetKeyName(SDL_Keycode key);
+
+/**
+    Get a key code from a human-readable name.
+
+    Params:
+        name = the human-readable key name.
+    
+    Returns:
+        key code, or `SDLK_UNKNOWN` if the name wasn't recognized; call
+        SDL_GetError() for more information.
+
+    Threadsafety:
+        This function is not thread safe.
+
+    See_Also:
+        $(D SDL_GetKeyFromScancode)
+        $(D SDL_GetKeyName)
+        $(D SDL_GetScancodeFromName)
+*/
+extern SDL_Keycode SDL_GetKeyFromName(const(char)* name);
+
+/**
+    Start accepting Unicode text input events in a window.
+
+    This function will enable text input (SDL_EVENT_TEXT_INPUT and
+    SDL_EVENT_TEXT_EDITING events) in the specified window. Please use this
+    function paired with SDL_StopTextInput().
+
+    Text input events are not received by default.
+
+    On some platforms using this function shows the screen keyboard and/or
+    activates an IME, which can prevent some key press events from being passed
+    through.
+
+    Params:
+        window = the window to enable text input.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_SetTextInputArea)
+        $(D SDL_StartTextInputWithProperties)
+        $(D SDL_StopTextInput)
+        $(D SDL_TextInputActive)
+*/
+extern bool SDL_StartTextInput(SDL_Window* window);
+
+/**
+    Text input type.
+
+    These are the valid values for SDL_PROP_TEXTINPUT_TYPE_NUMBER. Not every
+    value is valid on every platform, but where a value isn't supported, a
+    reasonable fallback will be used.
+
+    See_Also:
+        $(D SDL_StartTextInputWithProperties)
+*/
+enum SDL_TextInputType {
+
+    /**
+        The input is text
+    */
+    SDL_TEXTINPUT_TYPE_TEXT,
+
+    /**
+        The input is a person's name
+    */
+    SDL_TEXTINPUT_TYPE_TEXT_NAME,
+
+    /**
+        The input is an e-mail address
+    */
+    SDL_TEXTINPUT_TYPE_TEXT_EMAIL,
+
+    /**
+        The input is a username
+    */
+    SDL_TEXTINPUT_TYPE_TEXT_USERNAME,
+
+    /**
+        The input is a secure password that is hidden
+    */
+    SDL_TEXTINPUT_TYPE_TEXT_PASSWORD_HIDDEN,
+
+    /**
+        The input is a secure password that is visible
+    */
+    SDL_TEXTINPUT_TYPE_TEXT_PASSWORD_VISIBLE,
+
+    /**
+        The input is a number
+    */
+    SDL_TEXTINPUT_TYPE_NUMBER,
+
+    /**
+        The input is a secure PIN that is hidden
+    */
+    SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_HIDDEN,
+
+    /**
+        The input is a secure PIN that is visible
+    */
+    SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_VISIBLE
+}
+
+/**
+    Auto capitalization type.
+
+    These are the valid values for SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER.
+    Not every value is valid on every platform, but where a value isn't
+    supported, a reasonable fallback will be used.
+
+    See_Also:
+    $(D SDL_StartTextInputWithProperties)
+*/
+enum SDL_Capitalization {
+
+    /**
+        No auto-capitalization will be done
+    */
+    SDL_CAPITALIZE_NONE,
+
+    /**
+        The first letter of sentences will be capitalized
+    */
+    SDL_CAPITALIZE_SENTENCES,
+
+    /**
+        The first letter of words will be capitalized
+    */
+    SDL_CAPITALIZE_WORDS,
+
+    /**
+        All letters will be capitalized
+    */
+    SDL_CAPITALIZE_LETTERS
+}
+
+/**
+    Start accepting Unicode text input events in a window, with properties
+    describing the input.
+
+    This function will enable text input (SDL_EVENT_TEXT_INPUT and
+    SDL_EVENT_TEXT_EDITING events) in the specified window. Please use this
+    function paired with SDL_StopTextInput().
+
+    Text input events are not received by default.
+
+    On some platforms using this function shows the screen keyboard and/or
+    activates an IME, which can prevent some key press events from being passed
+    through.
+
+    These are the supported properties:
+
+    -   `SDL_PROP_TEXTINPUT_TYPE_NUMBER` - an SDL_TextInputType value that
+        describes text being input, defaults to SDL_TEXTINPUT_TYPE_TEXT.
+    -   `SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER` - an SDL_Capitalization value
+        that describes how text should be capitalized, defaults to
+        SDL_CAPITALIZE_SENTENCES for normal text entry, SDL_CAPITALIZE_WORDS for
+        SDL_TEXTINPUT_TYPE_TEXT_NAME, and SDL_CAPITALIZE_NONE for e-mail
+        addresses, usernames, and passwords.
+    -   `SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN` - true to enable auto completion
+        and auto correction, defaults to true.
+    -   `SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN` - true if multiple lines of text
+        are allowed. This defaults to true if SDL_HINT_RETURN_KEY_HIDES_IME is
+        "0" or is not set, and defaults to false if SDL_HINT_RETURN_KEY_HIDES_IME
+        is "1".
+
+    On Android you can directly specify the input type:
+
+    -   `SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER` - the text input type to
+        use, overriding other properties. This is documented at
+        https://developer.android.com/reference/android/text/InputType
+
+    Params:
+        window =    the window to enable text input.
+        props =     the properties to use.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_SetTextInputArea)
+        $(D SDL_StartTextInput)
+        $(D SDL_StopTextInput)
+        $(D SDL_TextInputActive)
+*/
+extern bool SDL_StartTextInputWithProperties(SDL_Window* window, SDL_PropertiesID props);
+
+enum SDL_PROP_TEXTINPUT_TYPE_NUMBER = "SDL.textinput.type";
+enum SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER = "SDL.textinput.capitalization";
+enum SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN = "SDL.textinput.autocorrect";
+enum SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN = "SDL.textinput.multiline";
+enum SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER = "SDL.textinput.android.inputtype";
+
+/**
+    Check whether or not Unicode text input events are enabled for a window.
+
+    Params:
+        window = the window to check.
+    
+    Returns:
+        true if text input events are enabled else false.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_StartTextInput)
+*/
+extern bool SDL_TextInputActive(SDL_Window* window);
+
+/**
+    Stop receiving any text input events in a window.
+
+    If SDL_StartTextInput() showed the screen keyboard, this function will hide
+    it.
+
+    Params:
+        window = the window to disable text input.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_StartTextInput)
+*/
+extern bool SDL_StopTextInput(SDL_Window* window);
+
+/**
+    Dismiss the composition window/IME without disabling the subsystem.
+
+    Params:
+        window = the window to affect.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_StartTextInput)
+        $(D SDL_StopTextInput)
+*/
+extern bool SDL_ClearComposition(SDL_Window* window);
+
+/**
+    Set the area used to type Unicode text input.
+
+    Native input methods may place a window with word suggestions near the
+    cursor, without covering the text being entered.
+
+    Params:
+        window =    the window for which to set the text input area.
+        rect =      the SDL_Rect representing the text input area, in window
+                    coordinates, or NULL to clear it.
+        cursor =    the offset of the current cursor location relative to
+                    `rect->x`, in window coordinates.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_GetTextInputArea)
+        $(D SDL_StartTextInput)
+*/
+extern bool SDL_SetTextInputArea(SDL_Window* window, const SDL_Rect* rect, int cursor);
+
+/**
+    Get the area used to type Unicode text input.
+
+    This returns the values previously set by SDL_SetTextInputArea().
+
+    Params:
+        window =    the window for which to query the text input area.
+        rect =      a pointer to an SDL_Rect filled in with the text input area,
+                    may be NULL.
+        cursor =    a pointer to the offset of the current cursor location
+                    relative to `rect->x`, may be NULL.
+    
+    Returns:
+        true on success or false on failure; call SDL_GetError() for more
+        information.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_SetTextInputArea)
+*/
+extern bool SDL_GetTextInputArea(SDL_Window* window, SDL_Rect* rect, int* cursor);
+
+/**
+    Check whether the platform has screen keyboard support.
+
+    Returns:
+        true if the platform has some screen keyboard support or false if
+        not.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_StartTextInput)
+        $(D SDL_ScreenKeyboardShown)
+*/
+extern bool SDL_HasScreenKeyboardSupport();
+
+/**
+    Check whether the screen keyboard is shown for given window.
+
+    Params:
+        window = the window for which screen keyboard should be queried.
+    
+    Returns:
+        true if screen keyboard is shown or false if not.
+
+    Threadsafety:
+        This function should only be called on the main thread.
+
+    See_Also:
+        $(D SDL_HasScreenKeyboardSupport)
+*/
+extern bool SDL_ScreenKeyboardShown(SDL_Window* window);
