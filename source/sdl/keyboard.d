@@ -52,12 +52,14 @@
         Luna Nielsen
 */
 module sdl.keyboard;
-import sdl.keycode;
-import sdl.scancode;
 import sdl.video;
 import sdl.properties;
 import sdl.rect;
 import sdl.stdc;
+
+// These are more or less integral to keyboard use.
+public import sdl.keycode;
+public import sdl.scancode;
 
 extern (C) nothrow @nogc:
 
