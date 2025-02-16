@@ -52,6 +52,7 @@
         Luna Nielsen
 */
 module sdl.metal;
+import sdl.d;
 import sdl.stdc;
 import sdl.video;
 
@@ -63,7 +64,7 @@ extern(C) nothrow @nogc:
     History:
         Available since SDL 3.2.0.
 */
-alias SDL_MetalView = void*;
+alias SDL_MetalView = OpaqueHandle!("SDL_MetalView");
 
 /**
     A handle to a CAMetalLayer.
@@ -71,7 +72,7 @@ alias SDL_MetalView = void*;
     History:
         Available since SDL 3.2.0.
 */
-alias SDL_MetalLayer = void*;
+alias SDL_MetalLayer = OpaqueHandle!("SDL_MetalLayer");
 
 /**
     Create a CAMetalLayer-backed NSView/UIView and attach it to the specified

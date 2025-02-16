@@ -49,9 +49,6 @@ extern(C) nothrow @nogc:
     Standards: 
         The values in this enumeration are based on the USB usage page standard: 
         $(LINK https://usb.org/sites/default/files/hut1_5.pdf)
-    
-    History:
-        Available since SDL 3.2.0.
 */
 enum SDL_Scancode {
     SDL_SCANCODE_UNKNOWN = 0,
