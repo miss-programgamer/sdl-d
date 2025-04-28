@@ -4,9 +4,27 @@ authors "Inochi2D Project"
 copyright "Copyright © 2025, Inochi2D Project"
 license "Zlib"
 
-libs "SDL3"
-
 targetPath "out/"
 targetType "sourceLibrary"
 
 buildRequirements "allowWarnings"
+
+configuration "win32" {
+    platforms "windows"
+
+    // x86
+    libs "./libs/x86/SDL3.lib" platform="x86-windows"
+    copyFiles "./libs/x86/SDL3.dll" platform="x86-windows"
+
+    // x86_64
+    libs "./libs/x64/SDL3.lib" platform="x86_64-windows"
+    copyFiles "./libs/x64/SDL3.dll" platform="x86_64-windows"
+
+    // arm64
+    libs "./libs/arm64/SDL3.lib" platform="aarch64-windows"
+    copyFiles "./libs/arm64/SDL3.dll" platform="aarch64-windows"
+}
+
+configuration "posix" {
+    libs "SDL3"
+}
