@@ -5,7 +5,7 @@ copyright "Copyright © 2025, Inochi2D Project"
 license "Zlib"
 
 targetPath "out/"
-targetType "sourceLibrary"
+targetType "library"
 
 buildRequirements "allowWarnings"
 
@@ -13,16 +13,18 @@ configuration "win32" {
     platforms "windows"
 
     // x86
-    libs "./libs/x86/SDL3.lib" platform="x86-windows"
-    copyFiles "./libs/x86/SDL3.dll" platform="x86-windows"
+    lflags "-L$PACKAGE_DIR/libs/x86" platform="x86"
+    copyFiles "libs/x86/SDL3.dll" "libs/x86/SDL3.pdb" platform="x86"
 
     // x86_64
-    libs "./libs/x64/SDL3.lib" platform="x86_64-windows"
-    copyFiles "./libs/x64/SDL3.dll" platform="x86_64-windows"
+    lflags "-L$PACKAGE_DIR/libs/x64" platform="x86_64"
+    copyFiles "libs/x64/SDL3.dll" "libs/x64/SDL3.pdb" platform="x86_64"
 
     // arm64
-    libs "./libs/arm64/SDL3.lib" platform="aarch64-windows"
-    copyFiles "./libs/arm64/SDL3.dll" platform="aarch64-windows"
+    lflags "-L$PACKAGE_DIR/libs/arm64" platform="arm64"
+    copyFiles "libs/arm64/SDL3.dll" "libs/arm64/SDL3.pdb" platform="arm64"
+
+    libs "SDL3"
 }
 
 configuration "posix" {
