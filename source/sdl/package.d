@@ -22,6 +22,7 @@ public import sdl.events;
 public import sdl.keyboard;
 public import sdl.mouse;
 public import sdl.joystick;
+public import sdl.render;
 public import sdl.gamepad;
 public import sdl.touch;
 public import sdl.pen;
