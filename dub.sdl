@@ -27,6 +27,13 @@ configuration "win32" {
     libs "SDL3"
 }
 
+configuration "apple" {
+    platforms "osx" "ios"
+    lflags \
+        "-F/Library/Frameworks" "-F/Library/Frameworks/SDL3.xcframework" "-Flibs/" \
+        "-framework" "SDL3"
+}
+
 configuration "posix" {
     libs "SDL3"
 }
