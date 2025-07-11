@@ -70,15 +70,38 @@ import sdl.events;
 */
 alias SDL_InitFlags = Uint32;
 
-enum SDL_InitFlags SDL_INIT_AUDIO = 0x00000010u; /** $(D SDL_INIT_AUDIO) implies $(D SDL_INIT_EVENTS) */
-enum SDL_InitFlags SDL_INIT_VIDEO = 0x00000020u; /** $(D SDL_INIT_VIDEO) implies $(D SDL_INIT_EVENTS), should be initialized on the main thread */
-enum SDL_InitFlags SDL_INIT_JOYSTICK = 0x00000200u; /** $(D SDL_INIT_JOYSTICK) implies $(D SDL_INIT_EVENTS), should be initialized on the same thread as $(D SDL_INIT_VIDEO) on Windows if you don't set $(D SDL_HINT_JOYSTICK_THREAD) */
-enum SDL_InitFlags SDL_INIT_HAPTIC = 0x00001000u;
-enum SDL_InitFlags SDL_INIT_GAMEPAD = 0x00002000u; /** $(D SDL_INIT_GAMEPAD) implies $(D SDL_INIT_JOYSTICK) */
-enum SDL_InitFlags SDL_INIT_EVENTS = 0x00004000u;
-enum SDL_InitFlags SDL_INIT_SENSOR = 0x00008000u; /** $(D SDL_INIT_SENSOR) implies $(D SDL_INIT_EVENTS) */
-enum SDL_InitFlags SDL_INIT_CAMERA = 0x00010000u; /** $(D SDL_INIT_CAMERA) implies $(D SDL_INIT_EVENTS) */
+/**
+    $(D SDL_INIT_AUDIO) implies $(D SDL_INIT_EVENTS)
+*/
+enum SDL_InitFlags SDL_INIT_AUDIO = 0x00000010u;
 
+/**
+    $(D SDL_INIT_VIDEO) implies $(D SDL_INIT_EVENTS), should be initialized on the main thread
+*/
+enum SDL_InitFlags SDL_INIT_VIDEO = 0x00000020u;
+
+/**
+    $(D SDL_INIT_JOYSTICK) implies $(D SDL_INIT_EVENTS), should be initialized on the same thread as $(D SDL_INIT_VIDEO) on Windows if you don't set $(D SDL_HINT_JOYSTICK_THREAD)
+*/
+enum SDL_InitFlags SDL_INIT_JOYSTICK = 0x00000200u;
+
+/**
+    $(D SDL_INIT_GAMEPAD) implies $(D SDL_INIT_JOYSTICK)
+*/
+enum SDL_InitFlags SDL_INIT_GAMEPAD = 0x00002000u;
+
+/**
+    $(D SDL_INIT_SENSOR) implies $(D SDL_INIT_EVENTS)
+*/
+enum SDL_InitFlags SDL_INIT_SENSOR = 0x00008000u;
+
+/**
+    $(D SDL_INIT_CAMERA) implies $(D SDL_INIT_EVENTS)
+*/
+enum SDL_InitFlags SDL_INIT_CAMERA = 0x00010000u;
+
+enum SDL_InitFlags SDL_INIT_EVENTS = 0x00004000u;
+enum SDL_InitFlags SDL_INIT_HAPTIC = 0x00001000u;
 enum SDL_InitFlags SDL_INIT_EVERYTHING = 
     SDL_INIT_AUDIO | SDL_INIT_VIDEO | 
     SDL_INIT_GAMEPAD | SDL_INIT_CAMERA | 
