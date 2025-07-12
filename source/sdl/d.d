@@ -61,8 +61,7 @@ template OpaqueHandle(string name) {
 	Params:
 	  T = A class type that matches the interface required by $(D AppMain).
 */
-template isAppMain(T) if (is(T == class))
-{
+template isAppMain(T) if (is(T == class)) {
 	import sdl.events;
 
 	enum hasConstructor = __traits(compiles, (string[] args) {
@@ -85,41 +84,33 @@ template isAppMain(T) if (is(T == class))
 	methods in a given class. This class is instantiated by said main function
 	and its methods invoked by SDl main callbacks.
 */
-mixin template AppMain(T) if (isAppMain!T)
-{
+mixin template AppMain(T) if (isAppMain!T) {
 	import sdl.main;
 
-    int main()
-    {
+    int main() {
         return SDL_RunApp(0, null, &SDL_main, null);
     }
 
-	extern (C) int SDL_main(int, char**)
-	{
+	extern (C) int SDL_main(int, char**) {
 		return SDL_EnterAppMainCallbacks(0, null, &SDL_AppInit, &SDL_AppIterate, &SDL_AppEvent, &SDL_AppQuit);
 	}
 
-    extern (C) SDL_AppResult SDL_AppInit(void** appstate, int, char**) nothrow
-    {
+    extern (C) SDL_AppResult SDL_AppInit(void** appstate, int, char**) nothrow {
         import core.runtime;
         import core.lifetime;
         import core.stdc.stdlib;
 
         *(cast(T**) appstate) = emplace!(T)(cast(T*) malloc(T.sizeof));
 
-        with (SDL_AppResult) try
-        {
+        with (SDL_AppResult) try {
             **(cast(T**) appstate) = new T(Runtime.args);
             return SDL_APP_CONTINUE;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return SDL_APP_FAILURE;
         }
     }
 
-    extern (C) void SDL_AppQuit(void* appstate, SDL_AppResult) nothrow
-    {
+    extern (C) void SDL_AppQuit(void* appstate, SDL_AppResult) nothrow {
         import core.lifetime;
         import core.stdc.stdlib;
 
@@ -127,27 +118,19 @@ mixin template AppMain(T) if (isAppMain!T)
         free(appstate);
     }
 
-    extern (C) SDL_AppResult SDL_AppIterate(void* appstate) nothrow
-    {
-        with (SDL_AppResult) try
-        {
+    extern (C) SDL_AppResult SDL_AppIterate(void* appstate) nothrow {
+        with (SDL_AppResult) try {
             (cast(T*) appstate).iterate();
             return SDL_APP_CONTINUE;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return SDL_APP_FAILURE;
         }
     }
 
-    extern (C) SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event) nothrow
-    {
-        with (SDL_AppResult) try
-        {
+    extern (C) SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event) nothrow {
+        with (SDL_AppResult) try {
             return (cast(T*) appstate).handle(*event);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return SDL_APP_FAILURE;
         }
     }

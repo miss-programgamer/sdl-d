@@ -135,8 +135,7 @@ extern int SDL_RunApp(int argc, char** argv, SDL_main_func mainFunction, void* r
 */
 extern int SDL_EnterAppMainCallbacks(int argc, char** argv, SDL_AppInit_func appinit, SDL_AppIterate_func appiter, SDL_AppEvent_func appevent, SDL_AppQuit_func appquit);
 
-version (Windows)
-{
+version (Windows) {
     /**
         Register a win32 window class for SDL's use.
 
